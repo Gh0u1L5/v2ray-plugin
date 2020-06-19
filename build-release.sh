@@ -12,7 +12,7 @@ fi
 
 [[ -z $upx ]] && upx="echo pending"
 if [[ $upx == "echo pending" ]] && hash upx 2>/dev/null; then
-	upx="upx -9"
+	upx="upx --brute"
 fi
 
 VERSION=$(git describe --tags)
@@ -27,8 +27,7 @@ mkdir bin
 for os in ${OSES[@]}; do
 	for arch in ${ARCHS[@]}; do
 		suffix=""
-		if [ "$os" == "windows" ]
-		then
+		if [ "$os" == "windows" ]; then
 			suffix=".exe"
 		fi
 		env CGO_ENABLED=0 GOOS=$os GOARCH=$arch go build -v -ldflags "$LDFLAGS" -gcflags "$GCFLAGS" -o v2ray-plugin_${os}_${arch}${suffix}
