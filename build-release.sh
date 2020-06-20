@@ -31,7 +31,7 @@ for os in ${OSES[@]}; do
 			suffix=".exe"
 		fi
 		env CGO_ENABLED=0 GOOS=$os GOARCH=$arch go build -v -ldflags "$LDFLAGS" -gcflags "$GCFLAGS" -o v2ray-plugin_${os}_${arch}${suffix}
-		$upx v2ray-plugin_${os}_${arch}${suffix} >/dev/null
+		#$upx v2ray-plugin_${os}_${arch}${suffix} >/dev/null
 		tar -zcf bin/v2ray-plugin-${os}-${arch}-$VERSION.tar.gz v2ray-plugin_${os}_${arch}${suffix}
 		$sum bin/v2ray-plugin-${os}-${arch}-$VERSION.tar.gz
 	done
@@ -42,13 +42,13 @@ ARMS=(5 6 7)
 for v in ${ARMS[@]}; do
 	env CGO_ENABLED=0 GOOS=linux GOARCH=arm GOARM=$v go build -v -ldflags "$LDFLAGS" -gcflags "$GCFLAGS" -o v2ray-plugin_linux_arm$v
 done
-$upx v2ray-plugin_linux_arm* >/dev/null
+#$upx v2ray-plugin_linux_arm* >/dev/null
 tar -zcf bin/v2ray-plugin-linux-arm-$VERSION.tar.gz v2ray-plugin_linux_arm*
 $sum bin/v2ray-plugin-linux-arm-$VERSION.tar.gz
 
 # ARM64 (ARMv8 or aarch64)
 env CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -v -ldflags "$LDFLAGS" -gcflags "$GCFLAGS" -o v2ray-plugin_linux_arm64
-$upx v2ray-plugin_linux_arm64 >/dev/null
+#$upx v2ray-plugin_linux_arm64 >/dev/null
 tar -zcf bin/v2ray-plugin-linux-arm64-$VERSION.tar.gz v2ray-plugin_linux_arm64
 $sum bin/v2ray-plugin-linux-arm64-$VERSION.tar.gz
 
