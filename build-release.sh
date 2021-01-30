@@ -12,7 +12,7 @@ fi
 
 [[ -z $upx ]] && upx="echo pending"
 if [[ $upx == "echo pending" ]] && hash upx 2>/dev/null; then
-	upx="upx --brute"
+	upx="upx -9"
 fi
 
 VERSION=$(git describe --tags)
